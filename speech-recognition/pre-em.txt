@@ -1,0 +1,22 @@
+#4d  pre-emphasis signal (Pem_Seg1) of Seg1
+'''Readme: if you want to run the program, you need to open the main.py because the Segment1 here is empty.'''
+time4=np.arange(0, len(Segment1))
+input=Segment1
+output = [None]*(len(Segment1)+2)
+print(input[0])
+output[0]=input[0]
+for k in range(1, (len(input)-1)):
+     output[k]=input[k] - 0.95*input[k-1]
+print(output,"output")
+time5=np.arange(0, len(output))
+pl.subplot(211)
+pl.plot(time4, Segment1)
+pl.title("Segment1")
+pl.xlabel('Time [s]')
+pl.ylabel('Amplitude')
+pl.subplot(212)
+pl.plot(time5, output)
+pl.title("Pem_Seg1")
+pl.xlabel('Time [s]')
+pl.ylabel('Amplitude')
+pl.show()

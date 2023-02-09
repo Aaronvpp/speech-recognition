@@ -1,0 +1,28 @@
+#4c if you want to run the program, you need to run the main.py
+from cmath import sqrt
+def fft_own(segment1):
+    n = int(len(segment1))
+    x = segment1
+    y = [0] * (n)
+    # define j so that it can be used later
+    j = sqrt(-1)
+    for k in range(0, n):
+        for l in range(0, n):
+            # Carry out the summation
+            y[k] += x[l] * (np.exp((-np.pi * j * l * k * 2) / n))
+
+    for i in range(0, n):
+        print(f"y{i} = {y[i]}")
+    return y
+# Number of sample points
+N = len(Segment1)
+# sample spacing
+T = samplerate
+x = np.linspace(0.0, N*T, N, endpoint=False)
+y = Segment1
+yf = fft_own(y)
+print(yf,"yfyfyf")
+xf = fft_frequency(N, T)[:N//2]
+import matplotlib.pyplot as plt
+plt.plot(xf, 2.0/N * np.abs(yf[0:N//2]))
+plt.show()
