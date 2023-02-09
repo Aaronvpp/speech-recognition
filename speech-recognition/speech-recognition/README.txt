@@ -1,5 +1,18 @@
 python 3.9 is used.
 
+This program can be called as a LPC processor for a 10-word isolated speech recognition system and mainly follows the 5 steps and realized by the author myself.
+1.End-point detection
+2.Pre-emphasis -- high pass filtering 
+(3a) Frame blocking and (3b) Windowing
+4.Feature extraction
+(4a)Find Cepstral coefficients by LPC
+(i)Auto-correlation analysis
+(ii)LPC analysis,
+(iii)Find Cepstral coefficients, 
+(4b)or find Cepstral coefficients directly
+5.Distortion measure calculations
+
+
 The main.py includes part3-4 and you can directly open it in Pycharm and change the path mentioned in the "readme" inside the python program
 
 Also, you have to install the package mentioned in the "import" section. 
