@@ -1,0 +1,44 @@
+[ 1.00000000e+00 -1.17961196e-16 -3.46944695e-17  4.51028104e-17
+ -2.08166817e-17 -1.11022302e-16  5.55111512e-17  0.00000000e+00
+  2.49800181e-16  0.00000000e+00] LPC_matrix
+
+//Code//
+import math
+import wave
+import pylab as pl
+import matplotlib.pyplot as plt
+import numpy as np
+import stdio as stdio
+from scipy import signal
+from scipy.io import wavfile
+from scipy.io.wavfile import read
+from pynverse import inversefunc
+ORDER = 10
+WINDOW=len(Segment1)
+auto_coeff = np.zeros((ORDER+1,ORDER+1))
+sig = Segment1
+
+for i in range(0,ORDER+1):
+    auto_coeff[i]=0.0
+    for j in range(i,(WINDOW)):
+       auto_coeff[i]+= sig[j]*sig[j-i]
+auto_coeff=auto_coeff[:,1]
+print(auto_coeff,"r0...r10")
+matrixcoeff = np.array([[auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4],auto_coeff[5],auto_coeff[6],auto_coeff[7],auto_coeff[8],auto_coeff[9]],
+             [auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4],auto_coeff[5],auto_coeff[6],auto_coeff[7],auto_coeff[8]],
+             [auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4],auto_coeff[5],auto_coeff[6],auto_coeff[7]],
+             [auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4],auto_coeff[5],auto_coeff[6]],
+             [auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4],auto_coeff[5]],
+             [auto_coeff[5],auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3],auto_coeff[4]],
+             [auto_coeff[6],auto_coeff[5],auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2],auto_coeff[3]],
+             [auto_coeff[7],auto_coeff[6],auto_coeff[5],auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1],auto_coeff[2]],
+             [auto_coeff[8],auto_coeff[7],auto_coeff[6],auto_coeff[5],auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0],auto_coeff[1]],
+             [auto_coeff[9],auto_coeff[8],auto_coeff[7],auto_coeff[6],auto_coeff[5],auto_coeff[4],auto_coeff[3],auto_coeff[2],auto_coeff[1],auto_coeff[0]]
+             ])
+
+print(matrixcoeff,"matrixcoeff")
+rightmatrix=auto_coeff[0:10]
+print(rightmatrix,"rightmarix")
+print(np.linalg.inv(matrixcoeff))
+LPC_matrix=np.matmul((np.linalg.inv(matrixcoeff)),rightmatrix)
+print(LPC_matrix,"LPC_matrix")
